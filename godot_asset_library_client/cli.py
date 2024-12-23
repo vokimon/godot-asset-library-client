@@ -70,8 +70,8 @@ def upload(
         "download_provider": config.repo_hosting,
         "download_commit": config.git_hash,
         "download_hash": "", # deprecated
-        "browse_url": f"{config.repo_url}",
-        "issues_url": f"{config.repo_url}/issues",
+        "browse_url": config.repo_url,
+        "issues_url": config.issues_url,
         "icon_url": f"{config.repo_raw}/icon.svg",
         "previews": previews,
     }
@@ -179,11 +179,15 @@ class Config:
 
     @property
     def repo_url(self):
-        return f'https://github.com/{self.repo}'
+        return git.browse_url_base(self)
 
     @property
     def repo_raw(self):
-        return f'https://raw.githubusercontent.com/{self.repo}/refs/heads/{self.branch}'
+        return git.raw_url_base(self)
+
+    @property
+    def issues_url(self):
+        return git.issues_url(self)
 
     @property
     def description(self):

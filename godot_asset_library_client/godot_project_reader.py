@@ -1,5 +1,6 @@
 from dataclasses import field
 import re
+from pathlib import Path
 
 def from_project(field):
     # TODO: This is somewhat fragile
@@ -12,7 +13,10 @@ def from_project(field):
     )
     pattern = patterns[field]
     project_content = Path('project.godot').read_text()
-    return re.search(pattern, project_content).group(1)
+    match =  re.search(pattern, project_content)
+    if not match:
+        return None
+    return match.group(1)
 
 def project_field(attribute, *args, **kwds):
     """
