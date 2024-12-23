@@ -2,8 +2,8 @@ import subprocess
 import re
 
 remote_patterns = [
-	('GitHub', r'git@github.com:([^.]+)\.git'),
-	('GitHub', r'https://github.com/([^.]+)\.git'),
+	('GitHub', r'^git@github.com:([^.]+)\.git$'),
+	('GitHub', r'^https://github.com/([^.]+)\.git$'),
 ]
 
 def revision_hash() -> str:
