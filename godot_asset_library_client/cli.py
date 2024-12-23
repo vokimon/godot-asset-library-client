@@ -191,17 +191,14 @@ class Config:
 
     repo: str = field(default_factory=git.repo_name)
     branch: str = field(default_factory=git.current_branch)
-    git_hash: str = field(default_factory=git.revision_hash())
-    repo_hosting: str = field(default_factory=git.repo_host())
+    git_hash: str = field(default_factory=git.revision_hash)
+    repo_hosting: str = field(default_factory=git.repo_host)
 
     project_name: str = project_field('project_name')
     project_version: str = project_field('project_version')
     config_description: str = project_field('description')
     godot_version: str = project_field('godot_version')
     icon: str = project_field('icon')
-
-    def __post_init__(self):
-        self.git_hash = get_git_revision_hash()
 
     @property
     def repo_url(self):

@@ -1,4 +1,10 @@
 import subprocess
+import re
+
+remote_patterns = [
+	('GitHub', r'git@github.com:([^.]+)\.git'),
+	('GitHub', r'https://github.com/([^.]+)\.git'),
+]
 
 def revision_hash() -> str:
     return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode().strip()
@@ -32,25 +38,29 @@ def remote_name() -> str:
 		)
 	return remotes[0]
 
+def repo_remote_url() -> str:
+	name = remote_name()
+	return subprocess.check_output(['git', 'remote', 'get-url', name]).decode().strip()
+
 def repo_name() -> str:
-	remote_name = remote_name()
-	remote_url = subprocess.check_output(['git', 'remote', 'get-url', remote_name]).decode().strip()
-	github = re.match('git@github.com:([^.]+).git', remote_url)
-	if github:
-		return github.group(1)
+	remote_url = repo_remote_url()
+	for hosting, pattern in remote_patterns:
+		match = re.match(pattern, remote_url)
+		if match:
+			return match.group(1)
 	raise Exception(
-		f"Repository name detection is only supported for github right now. "
-		f"Please explicit the repository name adding the `repo' key to the yaml configuration."
+		f"Repository name detection not supported for remote {remote_url}. "
+		f"Please add the key `repo` to the yaml config to make it explicit."
 	)
 
 def repo_host() -> str:
-	remote_name = remote_name()
-	remote_url = subprocess.check_output(['git', 'remote', 'get-url', remote_name]).decode().strip()
-	github = re.match('git@github.com:([^.]+).git', remote_url)
-	if github:
-		return "Github"
+	remote_url = repo_remote_url()
+	for hosting, pattern in remote_patterns:
+		match = re.match(pattern, remote_url)
+		if match:
+			return hosting
 	raise Exception(
-		f"Repository hosting detection is only supported for github right now. "
-		f"Please explicit the repository hosting service adding the `repo_hosting' key to the yaml configuration."
+		f"Repository hosting detection not supported for remote {remote_url}. "
+		f"Please add the key `repo_hosting` to the yaml config to make it explicit."
 	)
 
