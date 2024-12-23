@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 0.2.1 (2024-12-23)
+
+- 🐛 Support github https urls without .git
+
 # 0.2.0 (2024-12-23)
 
 - ✨ Autodetect git branch
