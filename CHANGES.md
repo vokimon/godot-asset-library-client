@@ -1,9 +1,13 @@
 # CHANGELOG
 
-# Unreleased
+# 0.2.0 (2024-12-23)
 
 - ✨ Autodetect git branch
-- ✨ Autodetect repo name and host for Github
+- ✨ Autodetect repo hosting for Github repos
+- ✨ Autodetect repo name for Github repos
+- ✨ BitBucket suport for repo autodetection
+- ♻️ Modularized to enable support for other hosting services than GitHub
+- 📝 Documented how to use it in Github Actions
 
 ## 0.1.1 (2024-12-23)
 

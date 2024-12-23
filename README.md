@@ -135,7 +135,8 @@ jobs:
         godot-asset-library-client asset-metadata.yaml --do
 ```
 
-You may want to remove the `--do` option until you are sure you are not uploading garbage to the library.
+You may want to remove the `--do` option until you are sure
+you are not uploading garbage to the asset library.
 
 
 ## TODO
