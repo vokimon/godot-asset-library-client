@@ -1,13 +1,13 @@
 # godot-asset-library-client
 
-[![CI](https://github.com/vokimon/markdown-customblocks/actions/workflows/main.yml/badge.svg)](https://github.com/vokimon/godot-asset-library-client/actions/workflows/main.yml)
+[![CI](https://github.com/vokimon/godot-asset-library-client/actions/workflows/main.yml/badge.svg)](https://github.com/vokimon/godot-asset-library-client/actions/workflows/main.yml)
 [![Coverage](https://img.shields.io/coveralls/vokimon/godot-asset-library-client/master.svg?style=flat-square&label=Coverage)](https://coveralls.io/r/vokimon/godot-asset-library-client)
 [![PyPi](https://img.shields.io/pypi/v/godot-asset-library-client.svg?style=flat-square&label=PyPI)](https://pypi.org/project/godot-asset-library-client/)
 [![license: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![downloads](https://img.shields.io/pypi/dm/godot-asset-library-client.svg?style=flat-square&label=PyPI%20Downloads)](https://pypi.org/project/godot-asset-library-client/)
 <!--
 [![image](https://img.shields.io/pypi/pyversions/godot-asset-library-client.svg?style=flat-square&label=Python%20Versions)](https://pypi.org/project/godot-asset-library-client/)
-[![image](https://img.shields.io/pypi/implementation/markdown-customblocks.svg?style=flat-square&label=Python%20Implementations)](https://pypi.org/project/godot-asset-library-client/)
+[![image](https://img.shields.io/pypi/implementation/godot-asset-library-client.svg?style=flat-square&label=Python%20Implementations)](https://pypi.org/project/godot-asset-library-client/)
 -->
 
 Interact with the Godot Asset Library
