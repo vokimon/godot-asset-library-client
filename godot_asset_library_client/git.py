@@ -5,6 +5,7 @@ class GitHub:
 	remote_patterns = [
 		r'^git@github.com:([^.]+)\.git$',
 		r'^https://github.com/([^.]+)\.git$',
+		r'^https://github.com/([^.]+)$',
 	]
 	@classmethod
 	def raw_url(cls, config):
