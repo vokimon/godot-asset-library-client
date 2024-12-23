@@ -33,12 +33,12 @@ pip install godot-asset-library-client
 - Define `GODOT_ASSET_LIB_USER` and `GODOT_ASSET_LIB_PASSWORD` environment variables.
   You may use a .env file with them but consider security concerns.
 
-- Write a yaml metadata file with content like this:
+- Write a yaml metadata file with content similar to this:
 
 ```yaml
 # asset-metadata.yaml
 
-asset_id: '6666666' # You will obtain this id after the first publish by hand
+asset_id: '6666666' # You will obtain this id after the first publication by hand
 repo_hosting: GitHub
 repo: vokimon/godot-dice-roller
 branch: main
@@ -96,11 +96,15 @@ From local git:
 
 ## TODO
 
+Sure you can help with those:
+
 - BUG: Previews are generated as json but the api returns a warning and ignores them
-- Solve the emoji problem by not removing them
-- Solution to the first upload
+- Solve the emoji problem by not removing them. The blacklist is quite limited and fragile.
+- Support first upload of a project
 - Auto-identify license available in repository
 - Auto-identify branch from current branch
 - Auto-identify repo name from git remote
+- Auto-identify repo hosting, first just check it is github
+- Support for other repo hosting services
 
 

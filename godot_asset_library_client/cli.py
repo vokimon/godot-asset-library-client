@@ -15,11 +15,16 @@ app = typer.Typer()
 
 @app.command()
 def upload(
-	metadata_file: Annotated[Path, typer.Argument(
+	yaml_metadata: Annotated[Path, typer.Argument(
 		exists=True,
+		readable=True,
 	)],
-	do: bool = False,
-	edit_preview: bool = False,
+	do: Annotated[bool, typer.Option(
+		help="Do the actual upload",
+	)] = False,
+	send_previews: Annotated[bool, typer.Option(
+		help="Send previews (this will be disabled by default until it works)",
+	)] = False,
 ):
 	"""Uploads the project to Godot Asset Library"""
 
@@ -28,7 +33,7 @@ def upload(
 	username = os.environ.get('GODOT_ASSET_LIB_USER')
 	password = os.environ.get('GODOT_ASSET_LIB_PASSWORD')
 
-	config = Config.from_file(metadata_file)
+	config = Config.from_file(yaml_metadata)
 
 	api = Api()
 	api.login(username, password)
@@ -89,7 +94,10 @@ def upload(
 		str(result))
 	print(f"Check at {api.base}/{result['url']}")
 
+
 class Api:
+	"""Access to the Godot Asset Library API"""
+
 	def __init__(self, base=None):
 		self.base = base or f"https://godotengine.org/asset-library/api/"
 
