@@ -7,15 +7,28 @@ import os
 from dotenv import load_dotenv
 import yaml
 from dataclasses import dataclass, field
+from typing import Annotated
+import typer
+import pygments
 
-def main():
+app = typer.Typer()
+
+@app.command()
+def upload(
+	metadata_file: Annotated[Path, typer.Argument(
+		exists=True,
+	)],
+	do: bool = False,
+	edit_preview: bool = False,
+):
+	"""Uploads the project to Godot Asset Library"""
 
 	# Load secrets from environment or .env file
 	load_dotenv('.env')
 	username = os.environ.get('ASSET_STORE_USER')
 	password = os.environ.get('ASSET_STORE_PASSWORD')
 
-	config = Config.from_file('tools/assetlib.yaml')
+	config = Config.from_file(metadata_file)
 
 	api = Api()
 	api.login(username, password)
@@ -27,7 +40,11 @@ def main():
 
 	config.edit_id = edit_id
 	if edit_id:
-		print(f"Detected pending edit {config.edit_id} for version {config.project_version}. Modifiying it.")
+		typer.secho(
+			f"Detected pending edit {config.edit_id} for version {config.project_version}.\n"
+			"Modifiying it instead of creating a new one.",
+			fg=typer.colors.BRIGHT_YELLOW,
+		)
 
 	resource = (
 		f'asset/edit/{config.edit_id}'
@@ -55,14 +72,22 @@ def main():
 		"previews": previews,
 	}
 
-	print(f"POST DATA to {api.base}{resource}:\n{yaml.dump(data)}")
-
 	# TODO: previews not working yet
-	data['previews'] = []
+	if not edit_preview:
+		data['previews'] = []
+
+	print(f"POST DATA to {api.base}{resource}:\n{pretty(data)}")
+
+	if not do:
+		typer.secho("NOTHING DONE", fg=typer.colors.BRIGHT_RED)
+		print("Check the output and use --do option to actually upload")
+		return
 
 	result = api.post(resource, data=data)
-	print("RESULT:", result)
-	print(f"https://godotengine.org/asset-library/{result['url']}")
+	import pygments
+	print("RESULT:", 
+		str(result))
+	print(f"Check at {api.base}/{result['url']}")
 
 class Api:
 	def __init__(self, base=None):
@@ -117,6 +142,14 @@ class Api:
 		]
 		if edit_ids:
 			return max(edit_ids)
+
+def pretty(data):
+	from pygments import highlight
+	from pygments.lexers import YamlLexer
+	from pygments.formatters import TerminalFormatter
+
+	code = yaml.dump(data)
+	return highlight(code, YamlLexer(), TerminalFormatter())
 
 def get_git_revision_hash() -> str:
     return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
@@ -292,6 +325,6 @@ def to_remove_previews(previews, old_previews):
 
 
 if __name__ == '__main__':
-	main()
+	app()
 
 

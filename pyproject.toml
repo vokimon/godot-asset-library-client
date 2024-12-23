@@ -35,6 +35,8 @@ classifiers = [
 dependencies = [
 	'pyyaml',
 	'requests',
+	'pygments',
+	'typer',
 	'python-dotenv',
 	'pytest', # testing
 	'pytest-cov<4', # testing
@@ -47,7 +49,7 @@ Repository = "https://github.com/vokimon/godot-asset-library-client"
 Changelog = "https://github.com/vokimon/godot-asset-library-client/blob/master/CHANGES.md"
 
 [project.scripts]
-godot-asset-library-client = "godot_asset_library_client.cli:main"
+godot-asset-library-client = "godot_asset_library_client.cli:app"
 
 [tool.setuptools.packages]
 find = {}
