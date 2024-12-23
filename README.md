@@ -33,9 +33,11 @@ pip install godot-asset-library-client
 - Define `ASSET_STORE_USER` and `ASSET_STORE_PASSWORD` environment variables.
   You may use a .env file with them but consider security concerns.
 
-- Write a yaml metadata file with content like this
+- Write a yaml metadata file with content like this:
 
 ```yaml
+# asset-metadata.yaml
+
 asset_id: '6666666' # You will obtain this id after the first publish by hand
 repo_hosting: GitHub
 repo: vokimon/godot-dice-roller
@@ -62,6 +64,18 @@ description_files:
 - CHANGES.md
 ```
 
+Then, from the root of your project (where `project.godot` resides):
+
+```bash
+godot-asset-library-client asset-metadata.yaml
+```
+
+Check that the metadata is correct, and then add the option `--do`:
+
+```bash
+godot-asset-library-client asset-metadata.yaml --do
+```
+
 ### Smart metadata guessing
 
 If not explicitly provided,
@@ -83,11 +97,10 @@ From local git:
 ## TODO
 
 - BUG: Previews are generated as json but the api returns a warning and ignores them
-- Expressive CLI interface with subcommands and options
 - Solve the emoji problem by not removing them
 - Solution to the first upload
-- Identify license available in repository
-- Identify branch from current branch
-- Identify repo name from git remote
+- Auto-identify license available in repository
+- Auto-identify branch from current branch
+- Auto-identify repo name from git remote
 
 
