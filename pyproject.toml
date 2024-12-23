@@ -10,7 +10,7 @@ authors = [
     { name="David García Garzón", email="voki@canvoki.net" },
 ]
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = { file="LICENSE"}
 keywords=["godot", "godot asset library", "api"]
 
