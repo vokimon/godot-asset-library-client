@@ -84,14 +84,14 @@ def upload(
     print(f"POST DATA to {api.base}{resource}:\n{pretty(data)}")
 
     if not do:
-        typer.secho("NOTHING DONE", fg=typer.colors.BRIGHT_RED)
+        typer.secho("NOTHING DONE, DRY RUN", fg=typer.colors.BRIGHT_RED)
         print("Check the output and use --do option to actually upload")
         return
 
     result = api.post(resource, data=data)
     import pygments
     print("RESULT:", 
-        str(result))
+        pretty(result))
     print(f"Check at {api.base}/{result['url']}")
 
 
