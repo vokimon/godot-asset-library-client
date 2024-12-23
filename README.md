@@ -50,13 +50,13 @@ previews:
 - youtube: AD8awHLpFxs
 
 # Shortcut for media commited in the repository
-- repoimage: /screenshots/example-landscape.png
-  repothumb: /screenshots/example-landscape-thumb.jpg
+- repoimage: /screenshots/screenshot1.png
+  repothumb: /screenshots/screenshot1-thumb.jpg
 
 # If not shortcutted the preview entry should look like this
 - type: image
-  link: https://raw.githubusercontent.com/vokimon/godot-dice-roller/refs/heads/main/screenshots/example-portrait.png
-  thumbnail: https://raw.githubusercontent.com/vokimon/godot-dice-roller/refs/heads/main/screenshots/example-portrait-thumb.jpg
+  link: https://raw.githubusercontent.com/vokimon/godot-dice-roller/refs/heads/main/screenshots/screenshot2.png
+  thumbnail: https://raw.githubusercontent.com/vokimon/godot-dice-roller/refs/heads/main/screenshots/screenshot2-thumb.jpg
 
 # These will be concatenated and processed as description
 description_files:
