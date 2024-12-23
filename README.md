@@ -13,14 +13,15 @@
 Interact with the Godot Asset Library
 
 This script retrieves all the information already available
-in the project to upload an Godot asset into the Godot asset library.
+in the project to upload a Godot asset into the Godot asset library.
 
 ## Features
 
-- Smart metadata gathering: avoid duplicating information already there
-- Smart behaviour with existing pending edits
+- Smart metadata gathering: do not duplicate metadata again
+- Reuses existing pending edits of the same release in the library to enable corrections.
 - Smart behaviour with existing previews (still not working)
 - Shortcuts for previews hosted youtube or the repository (still not working)
+- Easy integration in Github actions or any other CI/CD platform.
 
 ## Install
 
@@ -39,7 +40,7 @@ pip install godot-asset-library-client
 # asset-metadata.yaml
 
 asset_id: '6666666' # You will obtain this id after the first publication by hand
-category: "1" # 2D Tools
+category: "1" # 2D Tools. See available values in https://godotengine.org/asset-library/api/configure
 project_license: AGPLv3
 previews:
 
@@ -90,6 +91,9 @@ From `project.godot`:
 From local git:
 
 - Commit hash
+- Current branch
+- Repository hosting (currently only for github)
+- Repository name (currently only for github)
 
 ## Integration with Github Actions
 
