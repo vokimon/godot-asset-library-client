@@ -78,7 +78,7 @@ def upload(
 	}
 
 	# TODO: previews not working yet
-	if not edit_preview:
+	if not send_previews:
 		data['previews'] = []
 
 	print(f"POST DATA to {api.base}{resource}:\n{pretty(data)}")
