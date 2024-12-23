@@ -102,9 +102,6 @@ Sure you can help with those:
 - Solve the emoji problem by not removing them. The blacklist is quite limited and fragile.
 - Support first upload of a project
 - Auto-identify license available in repository
-- Auto-identify branch from current branch
-- Auto-identify repo name from git remote
-- Auto-identify repo hosting, first just check it is github
-- Support for other repo hosting services
-
+- Auto-identify repo name from git remote for non github hostings
+- Auto-identify repo hosting for non github hostings
 

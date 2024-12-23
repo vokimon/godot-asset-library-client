@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# Unreleased
+
+- ✨ Autodetect git branch
+- ✨ Autodetect repo name and host for Github
+
 ## 0.1.1 (2024-12-23)
 
 - 🐛 fixed half renamed option
