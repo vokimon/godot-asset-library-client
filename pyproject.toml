@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "godot-asset-library-client"
+version = "0.1.0"
+description='Interaction with the Godot Asset Library'
+authors = [
+    { name="David García Garzón", email="voki@canvoki.net" },
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file="LICENSE"}
+keywords=["godot", "godot asset library", "api"]
+
+classifiers = [
+	'Development Status :: 5 - Production/Stable',
+	'Environment :: Console',
+	'Intended Audience :: Developers',
+	'Intended Audience :: Science/Research',
+	'Intended Audience :: Other Audience',
+	'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+	'Operating System :: OS Independent',
+	'Programming Language :: Python :: 3',
+	'Programming Language :: Python :: 3.8',
+	'Programming Language :: Python :: 3.9',
+	'Programming Language :: Python :: 3.10',
+	'Programming Language :: Python :: 3.11',
+	'Programming Language :: Python :: 3.12',
+	'Topic :: System :: Software Distribution',
+	'Topic :: Games/Entertainment',
+]
+
+dependencies = [
+	'pyyaml',
+	'requests',
+	'python-dotenv',
+	'pytest', # testing
+	'pytest-cov<4', # testing
+]
+
+[project.urls]
+Homepage = "https://vokimon.github.io/godot-asset-library-client"
+#Documentation = "https://vokimon.github.io/godot-asset-library-client"
+Repository = "https://github.com/vokimon/godot-asset-library-client"
+Changelog = "https://github.com/vokimon/godot-asset-library-client/blob/master/CHANGES.md"
+
+[project.scripts]
+godot-asset-library-client = "godot_asset_library_client.cli:main"
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.coverage.run]
+relative_files = true
+branch = true
+omit = ["**/*test.py"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=godot_asset_library_client --doctest-modules"
+
+
