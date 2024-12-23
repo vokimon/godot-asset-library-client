@@ -39,9 +39,6 @@ pip install godot-asset-library-client
 # asset-metadata.yaml
 
 asset_id: '6666666' # You will obtain this id after the first publication by hand
-repo_hosting: GitHub
-repo: vokimon/godot-dice-roller
-branch: main
 category: "1" # 2D Tools
 project_license: AGPLv3
 previews:
