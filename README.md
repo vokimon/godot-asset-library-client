@@ -91,6 +91,49 @@ From local git:
 
 - Commit hash
 
+## Integration with Github Actions
+
+Provided that you already have a working `asset-metadata.yaml` in your repository,
+add the environment variables for your secrets in Github in
+`Your Project / Settings / Secrets and Variables / Actions / Repository secrets`.
+
+
+Add this file to your repo:
+
+```yaml
+# .github/workflows/publish.yml
+name: Upload Plugin to Godot Asset Library
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish new version to asset lib
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3
+
+    - name: Godot Asset Lib
+      shell: bash
+      run: |
+        echo "GODOT_ASSET_LIB_USER=${{ secrets.GODOT_ASSET_LIB_USER }}" >> .env
+        echo "GODOT_ASSET_LIB_PASSWORD=${{ secrets.GODOT_ASSET_LIB_PASSWORD }}" >> .env
+        pip install godot-asset-library-client
+        godot-asset-library-client asset-metadata.yaml --do
+```
+
+You may want to remove the `--do` option until you are sure you are not uploading garbage to the library.
+
+
 ## TODO
 
 Sure you can help with those:
