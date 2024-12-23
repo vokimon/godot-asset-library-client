@@ -25,8 +25,8 @@ def upload(
 
 	# Load secrets from environment or .env file
 	load_dotenv('.env')
-	username = os.environ.get('ASSET_STORE_USER')
-	password = os.environ.get('ASSET_STORE_PASSWORD')
+	username = os.environ.get('GODOT_ASSET_LIB_USER')
+	password = os.environ.get('GODOT_ASSET_LIB_PASSWORD')
 
 	config = Config.from_file(metadata_file)
 

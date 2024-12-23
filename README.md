@@ -30,7 +30,7 @@ pip install godot-asset-library-client
 
 ## Usage
 
-- Define `ASSET_STORE_USER` and `ASSET_STORE_PASSWORD` environment variables.
+- Define `GODOT_ASSET_LIB_USER` and `GODOT_ASSET_LIB_PASSWORD` environment variables.
   You may use a .env file with them but consider security concerns.
 
 - Write a yaml metadata file with content like this:
