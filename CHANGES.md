@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.1 (2024-12-23)
+
+- 🐛 fixed half renamed option
+
 ## 0.1.0 (2024-12-23)
 
 - ✨ First public release
