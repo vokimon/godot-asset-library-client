@@ -122,16 +122,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3
-
     - name: Godot Asset Lib
       shell: bash
       run: |
         echo "GODOT_ASSET_LIB_USER=${{ secrets.GODOT_ASSET_LIB_USER }}" >> .env
         echo "GODOT_ASSET_LIB_PASSWORD=${{ secrets.GODOT_ASSET_LIB_PASSWORD }}" >> .env
-        pip install godot-asset-library-client
+        pip install --user godot-asset-library-client
         godot-asset-library-client asset-metadata.yaml --do
 ```
 
