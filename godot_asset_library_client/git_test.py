@@ -57,19 +57,6 @@ class GitProviders_Test(unittest.TestCase):
 		)
 
 
-	def test_bitbucket_https(self):
-		remote = 'https://bitbucket.org/guifibaix_coop/dummy_repo.git'
-		result = self.inferredParameters(remote)
-		self.assertNsEqual(result, ns(
-			remote = remote,
-			hosting = "BitBucket",
-			repo = 'guifibaix_coop/dummy_repo',
-			branch = 'main',
-			browse = 'https://bitbucket.org/guifibaix_coop/dummy_repo',
-			issues = 'https://bitbucket.org/guifibaix_coop/dummy_repo/issues',
-			raw = 'https://bitbucket.org/guifibaix_coop/dummy_repo/raw/main',
-		))
-
 	def test_github_https(self):
 		remote = 'https://github.com/vokimon/godot-asset-library-client.git'
 		result = self.inferredParameters(remote)
@@ -115,6 +102,32 @@ class GitProviders_Test(unittest.TestCase):
 			issues = 'https://github.com/vokimon/godot-asset-library-client/issues',
 			# this one changes
 			raw = 'https://raw.githubusercontent.com/vokimon/godot-asset-library-client/refs/heads/mycustombranch',
+		))
+
+	def test_bitbucket_https(self):
+		remote = 'https://bitbucket.org/guifibaix_coop/dummy_repo.git'
+		result = self.inferredParameters(remote)
+		self.assertNsEqual(result, ns(
+			remote = remote,
+			hosting = "BitBucket",
+			repo = 'guifibaix_coop/dummy_repo',
+			branch = 'main',
+			browse = 'https://bitbucket.org/guifibaix_coop/dummy_repo',
+			issues = 'https://bitbucket.org/guifibaix_coop/dummy_repo/issues',
+			raw = 'https://bitbucket.org/guifibaix_coop/dummy_repo/raw/main',
+		))
+
+	def test_gitea_https(self):
+		remote = 'https://gitea.com/vokimon/dummy_repo.git'
+		result = self.inferredParameters(remote)
+		self.assertNsEqual(result, ns(
+			remote = remote,
+			hosting = "Gitea",
+			repo = 'vokimon/dummy_repo',
+			branch = 'main',
+			browse = 'https://gitea.com/vokimon/dummy_repo',
+			issues = 'https://gitea.com/vokimon/dummy_repo/issues',
+			raw = 'https://gitea.com/vokimon/dummy_repo/raw/main',
 		))
 
 

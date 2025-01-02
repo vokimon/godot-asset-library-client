@@ -43,6 +43,12 @@ class BitBucket(StandardGitHost):
 		r'^https://[^@]+@bitbucket.org/([^.]+)\.git$',
 	]
 
+class Gitea(StandardGitHost):
+	domain = 'gitea.com'
+	remote_patterns = [
+		r'^git@gitea.com:([^.]+)\.git$',
+		r'^https://gitea.com/([^.]+)\.git$',
+	]
 
 
 providers = {
@@ -50,6 +56,7 @@ providers = {
 	for p in (
 		GitHub,
 		BitBucket,
+		Gitea,
 	)
 }
 
@@ -86,14 +93,14 @@ def remote_name() -> str:
 			f"More than one remote found ({', '.join(remotes)}) "
 			f"while detecting repository information. "
 			f"Please explicit repository name (user/repo) "
-			"and host (github, bitbucket...) in the yaml config."
+			"and host (github, bitbucket, gitea...) in the yaml config."
 		)
 	if not remotes:
 		raise Exception(
 			f"No remote repository detected. "
 			f"Unable to retrieve repository information. "
 			f"Please explicit repository name (user/repo) "
-			"and host (github, bitbucket...) in the yaml config."
+			"and host (github, bitbucket, gitea...) in the yaml config."
 		)
 	return remotes[0]
 
