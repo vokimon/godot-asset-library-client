@@ -33,7 +33,7 @@ classifiers = [
 ]
 
 dependencies = [
-	'pyyaml',
+	'yamlns',
 	'requests',
 	'pygments',
 	'typer',
