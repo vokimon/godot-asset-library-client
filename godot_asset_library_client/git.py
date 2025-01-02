@@ -1,42 +1,48 @@
 import subprocess
 import re
 
-class GitHub:
+class StandardGitHost:
+	"""
+	Most hostings use this pattern based on the domain.
+	If a hosting differs, just override the property method.
+	"""
+
+	def __init__(self, config=None):
+		self.config = config
+
+	@property
+	def browse_url(self) -> str:
+		return f'https://{self.domain}/{self.config.repo}'
+
+	@property
+	def issues_url(self) -> str:
+		return f'{self.config.repo_url}/issues'
+
+	@property
+	def raw_url(self) -> str:
+		return f'https://{self.domain}/{self.config.repo}/raw/{self.config.branch}'
+
+
+class GitHub(StandardGitHost):
+	domain = 'github.com'
 	remote_patterns = [
-		r'^git@github.com:([^.]+)\.git$',
-		r'^https://github.com/([^.]+)\.git$',
-		r'^https://github.com/([^.]+)$',
+		r'^git@github\.com:([^.]+)\.git$',
+		r'^https://github\.com/([^.]+)\.git$',
+		r'^https://github\.com/([^.]+)$',
 	]
-	@classmethod
-	def raw_url(cls, config):
-		return f'https://raw.githubusercontent.com/{config.repo}/refs/heads/{config.branch}'
 
-	@classmethod
-	def browse_url(cls, config):
-		return f'https://github.com/{config.repo}'
+	@property
+	def raw_url(self):
+		return f'https://raw.githubusercontent.com/{self.config.repo}/refs/heads/{self.config.branch}'
 
-	@classmethod
-	def issues_url(cls, config):
-		return f'{config.repo_url}/issues'
-
-
-class BitBucket:
+class BitBucket(StandardGitHost):
+	domain = 'bitbucket.org'
 	remote_patterns = [
-		r'^git@bitbucket.org:([^.]+)\.git$',
-		r'^https://bitbucket.org/([^.]+)\.git$',
+		r'^[^@]+@bitbucket\.org:([^.]+)\.git$',
+		r'^https://bitbucket\.org/([^.]+)\.git$',
+		r'^https://[^@]+@bitbucket.org/([^.]+)\.git$',
 	]
 
-	@classmethod
-	def raw_url(cls, config):
-		return f'https://bitbucket.org/{config.repo}/raw/{config.branch}'
-
-	@classmethod
-	def browse_url(cls, config):
-		return f'https://bitbucket.org/{config.repo}'
-
-	@classmethod
-	def issues_url(cls, config):
-		return f'{config.repo_url}/issues' # Could be also /jira but...
 
 
 providers = {
@@ -48,16 +54,16 @@ providers = {
 }
 
 def provider(config):
-	return providers.get(config.repo_hosting)
+	return providers.get(config.repo_hosting)(config)
 
 def raw_url_base(config):
-	return provider(config).raw_url(config)
+	return provider(config).raw_url
 
 def browse_url_base(config):
-	return provider(config).browse_url(config)
+	return provider(config).browse_url
 
 def issues_url(config):
-	return provider(config).issues_url(config)
+	return provider(config).issues_url
 
 def revision_hash() -> str:
     return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode().strip()
