@@ -110,10 +110,11 @@ so pull requests are very welcome.
 
 ## Integration with Github Actions
 
-Provided that you already have a working `asset-metadata.yaml` in your repository,
-add the environment variables for your secrets in Github in
-`Your Project / Settings / Secrets and Variables / Actions / Repository secrets`.
+Provided that you already have a working `asset-metadata.yaml` in your repository
+you can add a github action to have the extension updated on each release.
 
+Go to Github `Your Project / Settings / Secrets and Variables / Actions / Repository secrets`.
+Once there, add your secrets `GODOT_ASSET_LIB_USER` and `GODOT_ASSET_LIB_PASSWORD`.
 
 Add this file to your repo:
 
@@ -124,7 +125,7 @@ name: Upload Plugin to Godot Asset Library
 on:
   release:
     types: [published]
-  workflow_dispatch:
+  workflow_dispatch: # this enables on demand execution, useful when the release fails
 
 jobs:
   publish:
