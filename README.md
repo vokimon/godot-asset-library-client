@@ -92,8 +92,21 @@ From local git:
 
 - Commit hash
 - Current branch
-- Repository hosting (currently only for github)
-- Repository name (currently only for github)
+- Repository hosting (only for supported hostings)
+- Repository name (only for supported hostings)
+
+Supported git hostings are:
+
+- Github
+- Bitbucket
+- Gitea
+
+If your hosting is not listed, you always can explicit the inferred parameters.
+Or, better, send a PR to add your hosting.
+Hostings are defined in `git.py` and tested in `git_test.py`.
+They are quite easy to add but I do not have repositories in all of them to test,
+so pull requests are very welcome.
+
 
 ## Integration with Github Actions
 
