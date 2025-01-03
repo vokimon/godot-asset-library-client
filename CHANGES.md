@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 0.3.0 (2025-01-03)
+
+- ✨ Support for Gitea hostings
+- ♻️ Simpler hosting definitionsa
+- 🏗️ Drop Python<3.11 (tests use enterContext, could work but no guaranties)
+
 # 0.2.1 (2024-12-23)
 
 - 🐛 Support github https urls without .git
