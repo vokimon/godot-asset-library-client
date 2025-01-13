@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 0.4.0 (2025-01-13)
 
 - ✨ Sending previews
 
