@@ -19,8 +19,8 @@ in the project to upload a Godot asset into the Godot asset library.
 
 - Smart metadata gathering: do not duplicate metadata again
 - Reuses existing pending edits of the same release in the library to enable corrections.
-- Smart behaviour with existing previews (still not working)
-- Shortcuts for previews hosted youtube or the repository (still not working)
+- Smart behaviour with existing previews
+- Shortcuts for previews hosted youtube or the repository
 - Easy integration in Github actions or any other CI/CD platform.
 
 ## Install
@@ -153,7 +153,6 @@ you are not uploading garbage to the asset library.
 
 Sure you can help with those:
 
-- BUG: Previews are generated as json but the api returns a warning and ignores them
 - Solve the emoji problem by not removing them. The blacklist is quite limited and fragile.
 - Support first upload of a project
 - Auto-identify license available in repository

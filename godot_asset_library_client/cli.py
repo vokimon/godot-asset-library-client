@@ -6,7 +6,6 @@ import yaml
 from dataclasses import dataclass, field
 from typing import Annotated
 import typer
-import pygments
 from . import git
 from .godot_project_reader import project_field
 
@@ -60,7 +59,7 @@ def upload(
     old_previews = old_data.get('previews', [])
     previews = previews_edit(config.previews, old_previews, config)
 
-    data = {
+    json = {
         "title": config.project_name,
         "description": config.description,
         "category_id": config.category,
@@ -78,17 +77,16 @@ def upload(
 
     # TODO: previews not working yet
     if not send_previews:
-        data['previews'] = []
+        json['previews'] = []
 
-    print(f"POST DATA to {api.base}{resource}:\n{pretty(data)}")
+    print(f"POST DATA to {api.base}{resource}:\n{pretty(json)}")
 
     if not do:
         typer.secho("NOTHING DONE, DRY RUN", fg=typer.colors.BRIGHT_RED)
         print("Check the output and use --do option to actually upload")
         return
 
-    result = api.post(resource, data=data)
-    import pygments
+    result = api.post(resource, json=json)
     print("RESULT:", 
         pretty(result))
     print(f"Check at {api.base}/{result['url']}")
@@ -101,7 +99,7 @@ class Api:
         self.base = base or f"https://godotengine.org/asset-library/api/"
 
     def login(self, username, password):
-        r = self.post('/login', data=dict(
+        r = self.post('/login', json=dict(
             username=username,
             password=password,
         ))
@@ -116,13 +114,14 @@ class Api:
             print(response.text)
             raise
 
-    def post(self, url, data={}, *args, **kwds):
+    def post(self, url, json={}, *args, **kwds):
         if hasattr(self, 'token'):
-            data = dict(data, token=self.token)
+            json = dict(json, token=self.token)
 
         response = requests.post(
             self.base+url,
-            data=data,
+            json=json,
+            headers = {'Content-Type': 'application/json; charset=utf-8'},
             *args, **kwds)
         return self._process_response(response)
 
@@ -206,7 +205,7 @@ class Config:
         config_yaml = yaml.safe_load(Path(filename).read_text())
         return cls(**config_yaml)
 
-def remove_emojis(description: str):
+def remove_emojis(description: str) -> str:
     for emoji in "✨🐛🏗🧹🔧📝♻️💄":
         description = description.replace(emoji, '')
     return description
