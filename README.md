@@ -65,13 +65,13 @@ description_files:
 Then, from the root of your project (where `project.godot` resides):
 
 ```bash
-godot-asset-library-client asset-metadata.yaml
+godot-asset-library-client upload asset-metadata.yaml
 ```
 
 Check that the metadata is correct, and then add the option `--do`:
 
 ```bash
-godot-asset-library-client asset-metadata.yaml --do
+godot-asset-library-client upload asset-metadata.yaml --do
 ```
 
 ### Smart metadata guessing
@@ -142,7 +142,7 @@ jobs:
         echo "GODOT_ASSET_LIB_USER=${{ secrets.GODOT_ASSET_LIB_USER }}" >> .env
         echo "GODOT_ASSET_LIB_PASSWORD=${{ secrets.GODOT_ASSET_LIB_PASSWORD }}" >> .env
         pip install --user godot-asset-library-client
-        godot-asset-library-client asset-metadata.yaml --do
+        godot-asset-library-client upload asset-metadata.yaml --do
 ```
 
 You may want to remove the `--do` option until you are sure
