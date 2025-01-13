@@ -2,16 +2,20 @@ from dataclasses import field
 import re
 from pathlib import Path
 
+_patterns = dict(
+    project_name = r'config/name="([^"]+)"',
+    project_version = r'config/version="([^"]+)"',
+    description = r'config/description="([^"]+)"',
+    godot_version = r'config/features=PackedStringArray[(]"([^"]+)"',
+    icon = r'config/icon="res:/([^"]+)"',
+)
+
+def available_fields():
+    return _patterns.keys()
+
 def from_project(field):
     # TODO: This is somewhat fragile
-    patterns = dict(
-        project_name = r'config/name="([^"]+)"',
-        project_version = r'config/version="([^"]+)"',
-        description = r'config/description="([^"]+)"',
-        godot_version = r'config/features=PackedStringArray[(]"([^"]+)"',
-        icon = r'config/icon="res:/([^"]+)"',
-    )
-    pattern = patterns[field]
+    pattern = _patterns[field]
     project_content = Path('project.godot').read_text()
     match =  re.search(pattern, project_content)
     if not match:

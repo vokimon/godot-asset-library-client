@@ -7,8 +7,33 @@ from .utils import pretty
 from .api import Api
 from .config import Config
 from .previews import previews_edit
+from .godot_project_reader import from_project, available_fields
 
 app = typer.Typer()
+
+@app.command()
+def project_field(
+    field: Annotated[str, typer.Argument()] = None,
+):
+    """Shows the value of the project parameter"""
+    fields = available_fields()
+
+    def print_available_fields():
+        print("Available fields:")
+        for field in fields:
+            print(f"- {field}")
+
+    if not field:
+        print_available_fields()
+        return
+
+    if field not in fields:
+        print(f"Field '{field}' not available")
+        print_available_fields()
+        return
+
+    print(from_project(field))
+
 
 @app.command()
 def upload(
