@@ -69,7 +69,6 @@ def upload(
         asset_id = config.asset_id,
         version_string = config.project_version,
     )
-    edited_previews = api.asset_edit_previews(config.edit_id)
 
     if config.edit_id:
         typer.secho(
@@ -78,6 +77,7 @@ def upload(
             fg=typer.colors.BRIGHT_YELLOW,
         )
         resource = f'asset/edit/{config.edit_id}'
+        edited_previews = api.asset_edit_previews(config.edit_id)
 
     json = {
         "title": config.project_name,
