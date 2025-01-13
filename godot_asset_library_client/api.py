@@ -57,3 +57,11 @@ class Api:
         if edit_ids:
             return max(edit_ids)
 
+    def asset_previews(self, asset_id):
+        result = self.get(f'asset/{asset_id}')
+        return result.get('previews', [])
+
+    def asset_edit_previews(self, edit_id):
+        result = self.get(f'asset/edit/{edit_id}')
+        return result.get('previews', [])
+

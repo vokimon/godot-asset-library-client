@@ -60,28 +60,24 @@ def upload(
     api = Api()
     api.login(username, password)
 
-    edit_id = api.pending_version_edit(
+    resource = f'asset/{config.asset_id}'
+
+    old_previews = api.asset_previews(config.asset_id)
+    previews = previews_edit(config.previews, old_previews, config)
+
+    config.edit_id = api.pending_version_edit(
         asset_id = config.asset_id,
         version_string = config.project_version,
     )
+    edited_previews = api.asset_edit_previews(config.edit_id)
 
-    config.edit_id = edit_id
-    if edit_id:
+    if config.edit_id:
         typer.secho(
             f"Detected pending edit {config.edit_id} for version {config.project_version}.\n"
             "Modifiying it instead of creating a new one.",
             fg=typer.colors.BRIGHT_YELLOW,
         )
-
-    resource = (
-        f'asset/edit/{config.edit_id}'
-        if config.edit_id else
-        f'asset/{config.asset_id}'
-    )
-
-    old_data = api.get(f'asset/{config.asset_id}')
-    old_previews = old_data.get('previews', [])
-    previews = previews_edit(config.previews, old_previews, config)
+        resource = f'asset/edit/{config.edit_id}'
 
     json = {
         "title": config.project_name,
@@ -111,7 +107,7 @@ def upload(
         return
 
     result = api.post(resource, json=json)
-    print("RESULT:", 
+    print("RESULT:",
         pretty(result))
     print(f"Check at {api.base}/{result['url']}")
 
