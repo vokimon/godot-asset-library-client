@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.5.0 (2025-01-13)
+
+- 💥 BREAKING CHANGE: former behavior is now the 'upload' subcommand
+- ✨ new `project-field` subcommand to obtain godot project fields
+
 ## 0.4.0 (2025-01-13)
 
 - ✨ Sending previews
