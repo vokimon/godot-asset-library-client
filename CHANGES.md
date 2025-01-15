@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.5.1 (2025-01-15)
+
+- 🏗️ Recover Python 3.10 compatibility (godot ci images use that version)
+- 📝 Updated documentation to the cli changes
+
 ## 0.5.0 (2025-01-13)
 
 - 💥 BREAKING CHANGE: former behavior is now the 'upload' subcommand
