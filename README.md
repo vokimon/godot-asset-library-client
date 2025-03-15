@@ -153,7 +153,7 @@ you are not uploading garbage to the asset library.
 
 Sure you can help with those:
 
-- Solve the emoji problem by not removing them. The blacklist is quite limited and fragile.
+- Solve the emoji problem by not removing them. The blacklist is quite limited and fragile. https://github.com/godotengine/godot-asset-library/issues/345
 - Support first upload of a project
 - Auto-identify license available in repository
 - Auto-identify repo name from git remote for non github hostings
