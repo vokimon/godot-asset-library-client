@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.2 (2025-06-05)
+
+- 🐛 added missing gitmoji
+
 ## 0.5.1 (2025-01-15)
 
 - 🏗️ Recover Python 3.10 compatibility (godot ci images use that version)
