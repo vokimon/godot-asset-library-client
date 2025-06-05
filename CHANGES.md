@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.3 (2025-06-06)
+
+- 🐛 added more gitmojis
+
 ## 0.5.2 (2025-06-05)
 
 - 🐛 added missing gitmoji
