@@ -5,7 +5,7 @@ from . import git
 import yaml
 
 def remove_emojis(description: str) -> str:
-    for emoji in "✨🐛🏗🧹🔧📝♻️💄💥":
+    for emoji in "✨🐛🏗🧹🔧📝♻️💄💥🚧⚡️🌐🏳✅🎨":
         description = description.replace(emoji, '')
     return description
 
