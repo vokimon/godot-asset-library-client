@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.5 (2025-10-24)
+
+- 🐛 removing undeclared consolemsg dependency
+
 ## 0.5.4 (2025-10-24)
 
 - 🐛 using unicode range for emojis
