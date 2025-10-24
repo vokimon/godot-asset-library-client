@@ -1,6 +1,5 @@
 import subprocess
 import re
-from consolemsg import warn
 
 class StandardGitHost:
 	"""
@@ -91,7 +90,7 @@ def remote_name() -> str:
 	remotes = subprocess.check_output(['git', 'remote']).decode().strip().split()
 	if len(remotes) > 1:
 		if 'origin' in remotes:
-			warn(f"More than one remote found, using 'origin'. Others were: {', '.join(remotes)}")
+			print(f"More than one remote found, using 'origin'. Others were: {', '.join(remotes)}")
 			return 'origin'
 		raise Exception(
 			f"More than one remote found ({', '.join(remotes)}) "
