@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.5.4 (2025-10-24)
+
+- 🐛 using unicode range for emojis
+- ✨ allow multiple git remotes if one is origin
+
 ## 0.5.3 (2025-06-06)
 
 - 🐛 added more gitmojis
